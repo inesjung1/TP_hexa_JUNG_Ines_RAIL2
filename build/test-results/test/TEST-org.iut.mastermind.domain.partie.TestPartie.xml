@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test d'une partie:" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-10-11T07:27:54" hostname="INES" time="0.027">
+  <properties/>
+  <testcase name="enregistre la partie quand elle est victorieuse" classname="org.iut.mastermind.domain.partie.TestPartie" time="0.006"/>
+  <testcase name="termine la partie quand le nombre d'essais est dÃ©passÃ©" classname="org.iut.mastermind.domain.partie.TestPartie" time="0.004"/>
+  <testcase name="lÃ¨ve une erreur quand la partie est terminÃ©e" classname="org.iut.mastermind.domain.partie.TestPartie" time="0.005"/>
+  <testcase name="met Ã  jour le nombre d'essais" classname="org.iut.mastermind.domain.partie.TestPartie" time="0.004"/>
+  <testcase name="retourne le rÃ©sultat du mot proposÃ©" classname="org.iut.mastermind.domain.partie.TestPartie" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

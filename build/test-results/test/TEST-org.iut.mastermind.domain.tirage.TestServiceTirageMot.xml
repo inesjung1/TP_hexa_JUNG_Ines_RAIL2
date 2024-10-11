@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test du tirage alÃ©atoire:" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-10-11T07:27:55" hostname="INES" time="0.005">
+  <properties/>
+  <testcase name="renvoie un mot de maniÃ¨re alÃ©atoire" classname="org.iut.mastermind.domain.tirage.TestServiceTirageMot" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
