@@ -24,7 +24,6 @@ public class Mastermind {
     // sinon on utilise le service de tirage aléatoire pour obtenir un mot
     // et on initialise une nouvelle partie et on la stocke
     public boolean nouvellePartie(Joueur joueur) {
-        // on récupère éventuellement la partie enregistrée pour le joueur
         Optional<Partie> partieEnCours = partieRepository.getPartieEnregistree(joueur);
         if (isJeuEnCours(partieEnCours)) {
             return false;
@@ -55,21 +54,14 @@ public class Mastermind {
     // on met à jour la bd pour la partie
     // on retourne le résulat de la partie
     private ResultatPartie calculeResultat(Partie partie, String motPropose) {
-        Reponse reponse = partie.tourDeJeu(motPropose);
-        if (reponse == null) {
-            return ResultatPartie.ERROR;
-        }else {
-            return ResultatPartie.create(reponse, partie.isTerminee());
-        }
+        Optional<Reponse> reponse = partie.tourDeJeu(motPropose);
+        return reponse.map(value -> ResultatPartie.create(value, partie.isTerminee())).orElse(ResultatPartie.ERROR);
     }
+
 
     // si la partie en cours est vide, on renvoie false
     // sinon, on évalue si la partie est terminée
     private boolean isJeuEnCours(Optional<Partie> partieEnCours) {
-        if (partieEnCours.isEmpty()) {
-            return false;
-        }else{
-            return true;
-        }
+        return (partieEnCours.isEmpty());
     }
 }

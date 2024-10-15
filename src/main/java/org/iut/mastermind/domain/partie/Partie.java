@@ -49,26 +49,23 @@ public class Partie {
     // et on renvoie la réponse
     // si toutes les lettres sont correctement placées,
     // on a terminé la partie
-    public Reponse tourDeJeu(String motPropose) {
-        this.verifieNbEssais();
-        if (!partieTerminee){
-            Reponse reponse = new Reponse(motADeviner);
-            reponse.compare(motPropose);
-            if ((reponse.lettresToutesPlacees()) || (nbEssais + 1 >= NB_ESSAIS_MAX)){
-                this.done();
-            }
-            nbEssais++;
-            return reponse;
-        }else{
-            return null;
-        }
-    }
-
-    // vérifie que le nombre d'essais max n'est pas atteint
-    private void verifieNbEssais() {
-        if (nbEssais >= NB_ESSAIS_MAX) {
-            this.done();
-        }
+    public Optional<Reponse> tourDeJeu(String motPropose) {
+        return (nbEssais > NB_ESSAIS_MAX)
+                ? Optional.<Reponse>empty()
+                : Optional.of(new Reponse(motADeviner))
+                .map(reponse -> {
+                    reponse.compare(motPropose);
+                    return reponse;
+                })
+                .filter(reponse -> reponse.lettresToutesPlacees() || nbEssais + 1 >= NB_ESSAIS_MAX)
+                .map(reponse -> {
+                    this.done();
+                    return reponse;
+                })
+                .or(() -> {
+                    nbEssais++;
+                    return Optional.empty();
+                });
     }
 
     // la partie est-elle terminée
