@@ -54,14 +54,19 @@ public class Mastermind {
     // on met à jour la bd pour la partie
     // on retourne le résulat de la partie
     private ResultatPartie calculeResultat(Partie partie, String motPropose) {
-        Optional<Reponse> reponse = partie.tourDeJeu(motPropose);
-        return reponse.map(value -> ResultatPartie.create(value, partie.isTerminee())).orElse(ResultatPartie.ERROR);
+        Reponse reponse = partie.tourDeJeu(motPropose);
+        if (reponse == null) {
+            return ResultatPartie.ERROR;
+        } else {
+            return ResultatPartie.create(reponse, partie.isTerminee());
+        }
     }
+
 
 
     // si la partie en cours est vide, on renvoie false
     // sinon, on évalue si la partie est terminée
     private boolean isJeuEnCours(Optional<Partie> partieEnCours) {
-        return (partieEnCours.isEmpty());
+        return partieEnCours.isPresent() && !partieEnCours.get().isTerminee();
     }
 }
