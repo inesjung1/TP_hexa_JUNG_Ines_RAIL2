@@ -13,58 +13,36 @@ public class Reponse {
         this.motSecret = mot;
     }
 
-    // on récupère la lettre à la position dans le résultat
     public Lettre lettre(int position) {
         return resultat.get(position);
     }
 
-    // on construit le résultat en analysant chaque lettre
-    // du mot proposé
     public void compare(String essai) {
         for (position = 0; position < essai.length(); position++) {
             resultat.add(evaluationCaractere(essai.charAt(position)));
         }
     }
 
-    // si toutes les lettres sont placées
     public boolean lettresToutesPlacees() {
-        if(resultat.contains(Lettre.INCORRECTE)){
-            return false;
-        }else{
-            return true;
-        }
+        return !(resultat.contains(Lettre.INCORRECTE));
     }
 
     public List<Lettre> lettresResultat() {
         return unmodifiableList(resultat);
     }
 
-    // renvoie le statut du caractère
     private Lettre evaluationCaractere(char carCourant) {
-        if (estPlace(carCourant)) {
-            return Lettre.PLACEE;
-        }else if (estPresent(carCourant)) {
-            return Lettre.NON_PLACEE;
-        }else{
-            return Lettre.INCORRECTE;
-        }
+        return estPlace(carCourant) ? Lettre.PLACEE
+                : estPresent(carCourant) ? Lettre.NON_PLACEE
+                : Lettre.INCORRECTE;
     }
 
-    // le caractère est présent dans le mot secret
     private boolean estPresent(char carCourant) {
-        if (motSecret.contains(String.valueOf(carCourant))) {
-            return true;
-        }else{
-            return false;
-        }
+        return (motSecret.contains(String.valueOf(carCourant)));
     }
 
-    // le caractère est placé dans le mot secret
     private boolean estPlace(char carCourant) {
-        if (motSecret.charAt(position) == carCourant) {
-            return true;
-        }else{
-            return false;
-        }
+        return (motSecret.charAt(position) == carCourant);
     }
+
 }
